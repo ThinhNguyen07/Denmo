@@ -1,0 +1,199 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+
+
+struct node
+{
+	int x;
+	node *next;
+};
+typedef node NODE;
+
+NODE* head;
+void init(NODE* &head){
+	head= NULL;
+}
+// ham tao node
+NODE* createnode(NODE* &head,int x)
+{
+	NODE* p= new NODE;
+	p->x= x;
+	p->next=NULL;
+}
+// them phan tu vao dau danh sach
+int insertfirst(NODE* &head,int x){
+
+	NODE* p= createnode(head,x);
+	if(head != NULL)
+		p->next=head;		
+	
+	head=p;
+}
+
+
+
+
+
+void nhap(NODE* &head,int n){
+	NODE* p;
+	printf("----====nhap n:");
+	scanf("%d",&n);
+	for(int i=0;i<n;i++)
+	{
+		
+		printf("nhap vao node thu %d: ",i);
+		scanf("%d",&p->x);
+		if(p->x < 0)
+		{
+			while(p->x <0)
+			{
+				printf("x phai la so nguyen duong:");
+				scanf("%d",&p->x);
+			}
+			insertfirst(head,p->x);
+		}
+		else
+			insertfirst(head,p->x);
+	}
+}
+
+int demsophantu(NODE* &head,int n){
+	int dem=0;
+	while(head!= NULL){
+		dem++;
+		head=head->next;
+	}
+//	return dem;	
+	printf("\n~~~~~~~~~~~~~~So  NODE la: %d",dem);
+}
+
+
+void deleteDMM(NODE* &head,NODE *P) 
+{
+	if (head != NULL)
+	{
+		NODE *p = head;
+		head = p->next;
+		delete(p);	
+	}
+}
+// xoa dau
+void deleteFirst(NODE* &head) {
+	if (head != NULL)
+	{
+		NODE *p = head;
+		head = p->next;
+		delete(p);	
+	}
+}
+// XOA CUOI
+void deleteLast(NODE *head) {
+	if (head == NULL)
+		deleteFirst(head);
+	else 
+	{
+		NODE *p = head;
+		NODE *pre = NULL;
+		while (p->next) 
+		{
+			pre = p;
+			p = p->next;
+		}
+		
+		pre->next = NULL;
+		delete(p);
+	}
+}
+void timphantu(NODE* &head,int n)
+{
+	int f,flag =0;
+	printf("\n Nhap phan tu can tim : ");
+	scanf("%d",&f);
+	if(head->x == f)
+	{
+		deleteFirst(head);
+	}
+	for(NODE *P = head; P->next != NULL;)
+	{
+		
+		NODE *K = P->next;
+		
+			
+		if(K->x == f)
+		{
+			if(K!=NULL)
+			{
+				P->next = K->next;
+				delete(K);
+			}
+			if(K!= NULL)
+			{
+					deleteLast(head);
+			}
+			
+		}
+		
+		
+		
+		P=P->next;
+		
+	}
+	
+}
+/*
+int Search (List L, item x) //tim x trong danh sach
+{
+    Node *P=L; 
+    int i=1;
+    while (P != NULL && P->Data != x) //duyet danh sach den khi tim thay hoac ket thuc danh sach
+    {
+        P = P->next;
+        i++;
+    }
+    if (P != NULL) return i; //tra ve vi tri tim thay
+    else return 0; //khong tim thay
+}
+*/
+
+
+void xuat(NODE* head,int n){
+	
+	while(head != NULL){
+		printf("%d\t",head->x);
+		head= head->next;
+	}
+//	printf("\n");
+}
+
+// HAM XUAT 2
+void xuatds(NODE *head)
+{
+	
+	for(NODE *P = head; P != NULL;)  // tao node p, node = head.
+	{
+			printf("%2d",P->x);
+			P=P->next;
+	}
+	
+}
+
+int main(){
+	NODE* head;	int f,x,n;
+	init(head);
+	nhap(head,n);
+//	xuat(head,n);
+	xuatds(head);
+	//demsophantu(head,n);
+	timphantu(head,x);
+	xuat(head,n);
+
+	return 0;
+	
+	
+}
+
+
+
+
+
